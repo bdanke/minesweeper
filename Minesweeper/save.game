@@ -1,175 +1,708 @@
 --- !ruby/object:Minesweeper
+time: 6.431957
+name: Anujan
 num_mines: 10
-board:
-- - 2
-  - ! '*'
-  - 1
-  - _
-  - _
-  - _
-  - _
-  - _
-  - _
-- - ! '*'
-  - ! '*'
-  - 1
-  - _
-  - _
-  - _
-  - _
-  - _
-  - _
-- - ! '*'
-  - ! '*'
-  - 3
-  - 2
-  - 1
-  - _
-  - _
-  - 1
-  - 1
-- - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - 1
-  - _
-  - _
-  - 1
-  - ! '*'
-- - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - 1
-  - _
-  - _
-  - 1
-  - 1
-- - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - 1
-  - _
-  - _
-  - _
-  - _
-- - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - 2
-  - 1
-  - _
-  - _
-  - _
-- - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - 2
-  - _
-  - _
-  - _
-- - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - 2
-  - _
-  - _
-  - _
-hidden_board:
-- - 2
-  - 2
-  - 1
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-- - O
-  - O
-  - 1
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-- - 2
-  - 3
-  - 3
-  - 2
-  - 1
-  - ! '*'
-  - ! '*'
-  - 1
-  - 1
-- - 1
-  - 2
-  - O
-  - O
-  - 1
-  - ! '*'
-  - ! '*'
-  - 1
-  - O
-- - O
-  - 3
-  - 2
-  - 2
-  - 1
-  - ! '*'
-  - ! '*'
-  - 1
-  - 1
-- - O
-  - 2
-  - 1
-  - 1
-  - 1
-  - ! '*'
-  - ! '*'
-  - ! '*'
-  - ! '*'
-- - 1
-  - 1
-  - 1
-  - O
-  - 2
-  - 1
-  - ! '*'
-  - ! '*'
-  - ! '*'
-- - ! '*'
-  - ! '*'
-  - 1
-  - 3
-  - O
-  - 2
-  - ! '*'
-  - ! '*'
-  - ! '*'
-- - ! '*'
-  - ! '*'
-  - ! '*'
-  - 2
-  - O
-  - 2
-  - ! '*'
-  - ! '*'
-  - ! '*'
+board: &70102693250540 !ruby/object:Board
+  grid:
+  - - !ruby/object:Tile
+      board: *70102693250540
+      row: 0
+      col: 0
+      mark: &70102693254660 !ruby/string
+        str: ▢
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: ▢
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 0
+      col: 1
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 0
+      col: 2
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 0
+      col: 3
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 0
+      col: 4
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 0
+      col: 5
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 0
+      col: 6
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 0
+      col: 7
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 0
+      col: 8
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+  - - !ruby/object:Tile
+      board: *70102693250540
+      row: 1
+      col: 0
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 1
+      col: 1
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 1
+      col: 2
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 1
+      col: 3
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 1
+      col: 4
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 1
+      col: 5
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 1
+      col: 6
+      mark: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '1'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 1
+      col: 7
+      mark: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '1'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 1
+      col: 8
+      mark: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '1'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+  - - !ruby/object:Tile
+      board: *70102693250540
+      row: 2
+      col: 0
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 2
+      col: 1
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 2
+      col: 2
+      mark: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '1'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 2
+      col: 3
+      mark: !ruby/string
+        str: '2'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '2'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 2
+      col: 4
+      mark: !ruby/string
+        str: '2'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '2'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 2
+      col: 5
+      mark: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '1'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 2
+      col: 6
+      mark: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '1'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 2
+      col: 7
+      mark: ✘
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 2
+      col: 8
+      mark: '1'
+      revealed: false
+      flagged: false
+  - - !ruby/object:Tile
+      board: *70102693250540
+      row: 3
+      col: 0
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 3
+      col: 1
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 3
+      col: 2
+      mark: !ruby/string
+        str: '2'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '2'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 3
+      col: 3
+      mark: ✘
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 3
+      col: 4
+      mark: ✘
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 3
+      col: 5
+      mark: '1'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 3
+      col: 6
+      mark: '1'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 3
+      col: 7
+      mark: '1'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 3
+      col: 8
+      mark: '1'
+      revealed: false
+      flagged: false
+  - - !ruby/object:Tile
+      board: *70102693250540
+      row: 4
+      col: 0
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 4
+      col: 1
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 4
+      col: 2
+      mark: !ruby/string
+        str: '2'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '2'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 4
+      col: 3
+      mark: ✘
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 4
+      col: 4
+      mark: '3'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 4
+      col: 5
+      mark: '1'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 4
+      col: 6
+      mark: *70102693254660
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 4
+      col: 7
+      mark: *70102693254660
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 4
+      col: 8
+      mark: *70102693254660
+      revealed: false
+      flagged: false
+  - - !ruby/object:Tile
+      board: *70102693250540
+      row: 5
+      col: 0
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 5
+      col: 1
+      mark: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '1'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 5
+      col: 2
+      mark: !ruby/string
+        str: '2'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '2'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 5
+      col: 3
+      mark: '3'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 5
+      col: 4
+      mark: '2'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 5
+      col: 5
+      mark: '1'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 5
+      col: 6
+      mark: *70102693254660
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 5
+      col: 7
+      mark: *70102693254660
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 5
+      col: 8
+      mark: *70102693254660
+      revealed: false
+      flagged: false
+  - - !ruby/object:Tile
+      board: *70102693250540
+      row: 6
+      col: 0
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 6
+      col: 1
+      mark: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '1'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 6
+      col: 2
+      mark: ✘
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 6
+      col: 3
+      mark: '3'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 6
+      col: 4
+      mark: ✘
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 6
+      col: 5
+      mark: '2'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 6
+      col: 6
+      mark: *70102693254660
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 6
+      col: 7
+      mark: *70102693254660
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 6
+      col: 8
+      mark: *70102693254660
+      revealed: false
+      flagged: false
+  - - !ruby/object:Tile
+      board: *70102693250540
+      row: 7
+      col: 0
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 7
+      col: 1
+      mark: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '1'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 7
+      col: 2
+      mark: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '1'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 7
+      col: 3
+      mark: !ruby/string
+        str: '3'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '3'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 7
+      col: 4
+      mark: ✘
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 7
+      col: 5
+      mark: '4'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 7
+      col: 6
+      mark: '3'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 7
+      col: 7
+      mark: '2'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 7
+      col: 8
+      mark: '1'
+      revealed: false
+      flagged: false
+  - - !ruby/object:Tile
+      board: *70102693250540
+      row: 8
+      col: 0
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 8
+      col: 1
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 8
+      col: 2
+      mark: *70102693254660
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 8
+      col: 3
+      mark: !ruby/string
+        str: '1'
+        background: 9
+        mode: 0
+        uncolorized: !ruby/string
+          str: '1'
+          background: 9
+          mode: 0
+      revealed: true
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 8
+      col: 4
+      mark: '2'
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 8
+      col: 5
+      mark: ✘
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 8
+      col: 6
+      mark: ✘
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 8
+      col: 7
+      mark: ✘
+      revealed: false
+      flagged: false
+    - !ruby/object:Tile
+      board: *70102693250540
+      row: 8
+      col: 8
+      mark: '1'
+      revealed: false
+      flagged: false
 leader_boards:
   9: !ruby/object:LeaderBoard
     size: 9
-    leaders: []
+    leaders:
+    - - 7.319782
+      - Anujan
   16: !ruby/object:LeaderBoard
     size: 16
     leaders: []
-time: 
-name: 

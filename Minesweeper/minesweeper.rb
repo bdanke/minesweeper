@@ -22,8 +22,7 @@ class Tile
   end
 
   def show
-    #mark.colorize(color_character)
-    revealed ? mark.colorize(color_character) : (flagged ? FLAG : BLACK_SQUARE)
+    (revealed ? mark : (flagged ? FLAG : BLACK_SQUARE)).colorize(color_character)
   end
 
   def reveal_adjacents
@@ -50,6 +49,8 @@ class Tile
   end
 
   def color_character
+    return :red if flagged
+    return :default unless revealed
     case mark
     when '1'
       :cyan
@@ -61,7 +62,6 @@ class Tile
       :light_red
     when '5'
     when '6'
-    when FLAG
       :red
     when MINE
       :black
@@ -131,13 +131,21 @@ class Board
   end
 
   def render
+    spaces = "  "
     print "    "
-    puts (0...grid.size).to_a.join(" ")
-    puts "--" * (grid.size + 2)
+    print "  "
+    puts (0...grid.size).to_a.join(spaces)
+    puts "--" * (grid.size + 7)
     grid.each_with_index do |row, idx|
-      print "#{idx} | "
+      print "#{idx}"
+      if size > 10 && idx < 10
+        print spaces + " "
+      else
+        print spaces
+      end
+      print "| "
       row_mapped = row.map(&:show)
-      puts row_mapped.join(" ")
+      puts row_mapped.join(spaces)
     end
   end
 
