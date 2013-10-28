@@ -268,3 +268,7 @@ class LeaderBoard
     puts
   end
 end
+
+if __FILE__ == $PROGRAM_NAME
+  Minesweeper.create_or_load
+end
