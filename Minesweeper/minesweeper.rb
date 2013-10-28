@@ -28,19 +28,21 @@ class Minesweeper
     until game_over?
       render_board
       puts "What coordinate do you want to reveal or flag?"
-      command = gets.chomp.split
-      cmd, x, y = command
+      input = gets.chomp.split
+      cmd, x, y = input
       if (cmd == 'f')
         flag_location(x.to_i, y.to_i)
-      elsif (@board[x][y] == 'F')
+      elsif (@board[x.to_i][y.to_i] == 'F')
         puts 'That location is flagged, reflag it to reveal.'
       elsif (cmd == 'r')
         reveal_location(x.to_i, y.to_i)
       end
     end
+    puts "You #{lose? ? "lose" : "win"}!"
   end
 
   def flag_location(row, col)
+    return unless @board[row][col] == '*' || @board[row][col] == 'F'
     @board[row][col] = @board[row][col] == 'F' ? '*' : 'F'
   end
 
@@ -107,8 +109,8 @@ class Minesweeper
   def win?
     flat = @board.flatten
     return false if flat.include? '*'
-    return true if flat.count("F") == num_mines
-    return true if flat.count("*") == num_mines
+    return true if flat.count("F") == @num_mines
+    return true if flat.count("*") == @num_mines
   end
 
   def game_over?
