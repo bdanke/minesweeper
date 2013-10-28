@@ -4,6 +4,7 @@ class Minesweeper
   [-1, 0], [-1, -1], [0, -1]]
 
   def initialize(size, num_mines)
+    @num_mines = num_mines
     @board = Array.new(size) { Array.new(size, "*") }
     @hidden_board = @board.map { |el| el.is_a?(Array) ? el.dup : el}
     place_random_mines(num_mines)
@@ -28,11 +29,19 @@ class Minesweeper
       render_board
       puts "What coordinate do you want to reveal or flag?"
       command = gets.chomp.split
-      if (command[0] == 'r')
-        reveal_location(command[1].to_i, command[2].to_i)
-      else
+      cmd, x, y = command
+      if (cmd == 'f')
+        flag_location(x.to_i, y.to_i)
+      elsif (@board[x][y] == 'F')
+        puts 'That location is flagged, reflag it to reveal.'
+      elsif (cmd == 'r')
+        reveal_location(x.to_i, y.to_i)
       end
     end
+  end
+
+  def flag_location(row, col)
+    @board[row][col] = @board[row][col] == 'F' ? '*' : 'F'
   end
 
   def place_numbers
@@ -48,12 +57,9 @@ class Minesweeper
           if (adj_x < 0 || adj_y < 0 || adj_x >= @board.size || adj_y >= @board.size)
             next
           else
-            puts "ROW: #{x}, COL: #{y}, ADJX: #{adj_x}, ADJY: #{adj_y}"
             if @hidden_board[adj_x][adj_y] == 'O'
-              puts @hidden_board[adj_x][adj_y]
               count += 1
             end
-            puts count
           end
         end
         if (count > 0)
@@ -99,7 +105,10 @@ class Minesweeper
   end
 
   def win?
-
+    flat = @board.flatten
+    return false if flat.include? '*'
+    return true if flat.count("F") == num_mines
+    return true if flat.count("*") == num_mines
   end
 
   def game_over?
