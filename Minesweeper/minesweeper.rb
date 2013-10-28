@@ -1,171 +1,56 @@
 require 'yaml'
 require 'colorize'
-class Minesweeper
-  attr_accessor :board, :hidden_board, :num_mines, :leader_boards, :time, :name
-  ADJACENTS = [[1, 0], [1, 1], [0, 1], [-1, 1], [1, -1],
-  [-1, 0], [-1, -1], [0, -1]]
+require 'debugger'
 
-  FLAG = "\u2691"
-  MINE = "\u2718"
-  BLACK_SQUARE = "\u25A3"
-  WHITE_SQUARE = "\u25A2"
+FLAG = "\u2691"
+MINE = "\u2718"
+BLACK_SQUARE = "\u25A3"
+WHITE_SQUARE = "\u25A2"
+ADJACENTS = [[1, 0], [1, 1], [0, 1], [-1, 1], [1, -1],
+[-1, 0], [-1, -1], [0, -1]]
 
-  def initialize(size, num_mines)
-    @time = nil
-    @name = nil
-    @num_mines = num_mines
-    @board = Array.new(size) { Array.new(size, BLACK_SQUARE) }
-    @hidden_board = @board.map { |el| el.is_a?(Array) ? el.dup : el}
-    self.load_leader_boards
-    @leader_boards[size].display
-    place_random_mines(num_mines)
-    place_numbers
-    play
+class Tile
+  attr_accessor :mark, :revealed, :row, :col, :flagged, :board
+
+  def initialize(board, row, col, mark)
+    @board = board
+    @row = row
+    @col = col
+    @mark = mark
+    @revealed = false
+    @flagged = false
   end
 
-  def place_random_mines(num_mines)
-    mines = 0
-    until mines == num_mines
-      x = rand(board.size)
-      y = rand(board.size)
-      if hidden_board[x][y] != MINE
-        hidden_board[x][y] = MINE
-        mines += 1
-      end
-    end
+  def show
+    #mark.colorize(color_character)
+    revealed ? mark.colorize(color_character) : (flagged ? FLAG : BLACK_SQUARE)
   end
 
-  def play
-    if name.nil?
-      puts "What is your name?"
-      self.name = gets.chomp
-    end
-    start_time = Time.now || time
-    until game_over?
-      render_board
-      puts "What coordinate do you want to reveal (r) or flag (f)? (Example: r 1 3)"
-
-      input = gets.chomp.split
-      if input[0] == 'save'
-        self.time = Time.now - start_time
-        save(input[1])
-        return
-      end
-      handle_command(input)
-    end
-    end_time = Time.now
-    render_board
-    puts "You #{lose? ? "lose" : "win"}!"
-    if win?
-      self.time = end_time - start_time
-      leader_boards[board.size].check_and_add(time, name)
-    end
-  end
-
-  def handle_command(commands)
-    cmd, x, y = commands
-    if (cmd == 'f')
-      flag_location(x.to_i, y.to_i)
-    elsif (board[x.to_i][y.to_i] == FLAG)
-      puts 'That location is flagged, reflag it to reveal.'
-    elsif (cmd == 'r')
-      reveal_location(x.to_i, y.to_i)
-    end
-  end
-
-  def flag_location(row, col)
-    return unless board[row][col] == BLACK_SQUARE || board[row][col] == FLAG
-    board[row][col] = board[row][col] == FLAG ? BLACK_SQUARE : FLAG
-  end
-
-  def place_numbers
-    hidden_board.each_with_index do |row, x|
-      row.each_with_index do |col, y|
-        if (hidden_board[x][y] == MINE)
-          next
-        end
-        count = 0
-        ADJACENTS.each do |adj|
-          adj_x = x + adj[0]
-          adj_y = y + adj[1]
-          if (adj_x < 0 || adj_y < 0 || adj_x >= board.size || adj_y >= @board.size)
-            next
-          else
-            if hidden_board[adj_x][adj_y] == MINE
-              count += 1
-            end
-          end
-        end
-        if (count > 0)
-          hidden_board[x][y] = count
-        end
-      end
-    end
-  end
-
-  def reveal_location(row, col)
-    space = hidden_board[row][col]
-    if (space == MINE)
-      self.board[row][col] = MINE
-    elsif (space.is_a?(Fixnum))
-      self.board[row][col] = space
-    else
-      self.board[row][col] = WHITE_SQUARE
-      reveal_adjacents(row, col)
-    end
-  end
-
-  def reveal_adjacents(row, col)
+  def reveal_adjacents
     ADJACENTS.each do |adj|
       adj_x = row + adj[0]
       adj_y = col + adj[1]
+      pos = [adj_x, adj_y]
       next if (adj_x < 0 || adj_y < 0 || adj_x >= board.size || adj_y >= board.size)
-      has_mine = hidden_board[adj_x][adj_y] == MINE
-      checked = board[adj_x][adj_y] != BLACK_SQUARE
+      has_mine = board[pos].mark == MINE
+      checked = board[pos].revealed
       unless (has_mine || checked)
-        reveal_location(adj_x, adj_y)
+        board[pos].reveal_location
       end
     end
   end
 
-  def render_board
-    print "    "
-    puts (0...board.size).to_a.join(" ")
-    puts "--" * (board.size + 2)
-    board.each_with_index do |row, idx|
-      print "#{idx} | "
-      row_mapped = row.map do |el|
-        char = el.to_s.encode('utf-8')
-        char.colorize(color_character(char))
-       end
-      puts row_mapped.join(" ")
+  def reveal_location
+    if (mark == MINE || ('0'..'8').to_a.include?(mark))
+      self.revealed = true
+    else
+      self.revealed = true
+      reveal_adjacents
     end
   end
 
-  def lose?
-    board.flatten.include? MINE
-  end
-
-  def win?
-    flat = board.flatten
-    count = flat.count(FLAG) + flat.count(BLACK_SQUARE)
-    return true if count == num_mines
-    return false if flat.include? BLACK_SQUARE
-  end
-
-  def game_over?
-    win? || lose?
-  end
-
-  def save(fname="save.game")
-    fname ||= "save.game"
-    File.open(fname, 'w') do |f|
-      f.puts self.to_yaml
-    end
-  end
-
-  def color_character(char)
-    case char
+  def color_character
+    case mark
     when '1'
       :cyan
     when '2'
@@ -182,6 +67,159 @@ class Minesweeper
       :black
     else
       :default
+    end
+  end
+end
+
+class Board
+  attr_accessor :grid
+
+  def initialize(size, num_mines)
+    @grid = Array.new(size) { Array.new(size) }
+    setup_tiles
+    place_random_mines(num_mines)
+    place_numbers
+  end
+
+  def setup_tiles
+    grid.each_with_index do |row, x|
+      row.each_with_index do |col, y|
+        grid[x][y] = Tile.new(self, x, y, WHITE_SQUARE)
+      end
+    end
+  end
+
+  def size
+    grid.size
+  end
+
+  def place_numbers
+    grid.each_with_index do |row, x|
+      grid.each_with_index do |col, y|
+        if (grid[x][y].mark == MINE)
+          next
+        end
+        count = 0
+        ADJACENTS.each do |adj|
+          adj_x = x + adj[0]
+          adj_y = y + adj[1]
+          if (adj_x < 0 || adj_y < 0 || adj_x >= grid.size || adj_y >= grid.size)
+            next
+          else
+            if grid[adj_x][adj_y].mark == MINE
+              count += 1
+            end
+          end
+        end
+        if (count > 0)
+          self.grid[x][y].mark = count.to_s
+        end
+      end
+    end
+  end
+
+  def place_random_mines(num_mines)
+    mines = 0
+    until mines == num_mines
+      x = rand(grid.size)
+      y = rand(grid.size)
+      if grid[x][y].mark != MINE
+        grid[x][y].mark = MINE
+        mines += 1
+      end
+    end
+  end
+
+  def render
+    print "    "
+    puts (0...grid.size).to_a.join(" ")
+    puts "--" * (grid.size + 2)
+    grid.each_with_index do |row, idx|
+      print "#{idx} | "
+      row_mapped = row.map(&:show)
+      puts row_mapped.join(" ")
+    end
+  end
+
+  def [](pos)
+    grid[pos[0]][pos[1]]
+  end
+
+  def []=(pos, value)
+    grid[pos[0]][pos[1]] = value
+  end
+end
+
+class Minesweeper
+  attr_accessor :board, :num_mines, :leader_boards, :time, :name
+
+  def initialize(size, num_mines)
+    @time = nil
+    @name = nil
+    @num_mines = num_mines
+    @board = Board.new(size, num_mines)
+    self.load_leader_boards
+    @leader_boards[size].display
+    play
+  end
+
+  def play
+    if name.nil?
+      puts "What is your name?"
+      self.name = gets.chomp
+    end
+    start_time = Time.now || time
+    until game_over?
+      board.render
+      puts "What coordinate do you want to reveal (r) or flag (f)? (Example: r 1 3)"
+
+      input = gets.chomp.split
+      if input[0] == 'save'
+        self.time = Time.now - start_time
+        save(input[1])
+        return
+      end
+      handle_command(input)
+    end
+    end_time = Time.now
+    board.render
+    puts "You #{lose? ? "lose" : "win"}!"
+    if win?
+      self.time = end_time - start_time
+      leader_boards[board.size].check_and_add(time, name)
+    end
+  end
+
+  def handle_command(commands)
+    cmd, x, y = commands
+    pos = [x, y].map(&:to_i)
+    if (cmd == 'f')
+      board[pos].flagged = !board[pos].flagged
+    elsif (board[pos].flagged)
+      puts 'That location is flagged, reflag it to reveal.'
+    elsif (cmd == 'r')
+      board[pos].reveal_location
+    end
+  end
+
+  def lose?
+    board.grid.flatten.any? { |el| el.mark == MINE && el.revealed }
+  end
+
+  def win?
+    flat = board.grid.flatten
+    count = flat.select { |el| el.mark == FLAG || el.mark == BLACK_SQUARE }.count
+    count == num_mines
+  end
+
+  def game_over?
+    win? || lose?
+  end
+
+  def save(fname="save.game")
+    fname ||= "save.game"
+    File.open(fname, 'w') do |f|
+      f.puts self.to_yaml
     end
   end
 
