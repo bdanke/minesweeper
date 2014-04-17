@@ -1,6 +1,5 @@
 require 'yaml'
 require 'colorize'
-require 'debugger'
 
 FLAG = "\u2691"
 MINE = "\u2718"
@@ -216,8 +215,8 @@ class Minesweeper
 
   def win?
     flat = board.grid.flatten
-    count = flat.select { |el| el.mark == FLAG || el.mark == BLACK_SQUARE }.count
-    count == num_mines
+    count = flat.select { |el| el.revealed }.count
+    num_mines == @board.size ** 2 - count
   end
 
   def game_over?
